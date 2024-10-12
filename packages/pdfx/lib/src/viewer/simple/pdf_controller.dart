@@ -13,7 +13,7 @@ class PdfController with BasePdfController {
       ValueNotifier(PdfLoadingState.loading);
 
   /// Document future for showing in [PdfView]
-  Future<PdfDocument> document;
+  PdfDocument document;
 
   /// The page to show when first creating the [PdfView].
   late int initialPage;
@@ -90,18 +90,18 @@ class PdfController with BasePdfController {
           duration: duration, curve: curve);
 
   /// Load document
-  Future<void> loadDocument(
-    Future<PdfDocument> documentFuture, {
+  void loadDocument(
+    PdfDocument docToLoad, {
     int initialPage = 1,
   }) {
     loadingState.value = PdfLoadingState.loading;
-    return _loadDocument(documentFuture, initialPage: initialPage);
+    return _loadDocument(docToLoad, initialPage: initialPage);
   }
 
-  Future<void> _loadDocument(
-    Future<PdfDocument> documentFuture, {
+  void _loadDocument(
+    PdfDocument docToLoad, {
     int initialPage = 1,
-  }) async {
+  }) {
     if (_pdfViewState == null) return;
 
     try {
@@ -112,7 +112,7 @@ class PdfController with BasePdfController {
       _reInitPageController(initialPage);
       this.initialPage = initialPage;
 
-      _document = await documentFuture;
+      _document = docToLoad;
       loadingState.value = PdfLoadingState.success;
     } catch (error) {
       _pdfViewState!._loadingError =

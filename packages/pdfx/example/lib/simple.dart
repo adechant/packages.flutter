@@ -16,10 +16,13 @@ class _SimplePageState extends State<SimplePage> {
   @override
   void initState() {
     super.initState();
-    _pdfController = PdfController(
-      document: PdfDocument.openAsset('assets/hello.pdf'),
-      initialPage: _initialPage,
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      PdfDocument doc = await PdfDocument.openAsset('assets/hello.pdf');
+      _pdfController = PdfController(
+        document: doc,
+        initialPage: _initialPage,
+      );
+    });
   }
 
   @override
@@ -65,13 +68,13 @@ class _SimplePageState extends State<SimplePage> {
           ),
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: () {
+            onPressed: () async {
               if (_isSampleDoc) {
                 _pdfController.loadDocument(
-                    PdfDocument.openAsset('assets/flutter_tutorial.pdf'));
+                    await PdfDocument.openAsset('assets/flutter_tutorial.pdf'));
               } else {
-                _pdfController
-                    .loadDocument(PdfDocument.openAsset('assets/hello.pdf'));
+                _pdfController.loadDocument(
+                    await PdfDocument.openAsset('assets/hello.pdf'));
               }
               _isSampleDoc = !_isSampleDoc;
             },
