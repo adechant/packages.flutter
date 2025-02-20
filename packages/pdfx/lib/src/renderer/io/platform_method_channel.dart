@@ -67,15 +67,10 @@ class PdfxPlatformMethodChannel extends PdfxPlatform {
 /// Handles PDF document loaded on memory.
 class PdfDocumentMethodChannel extends PdfDocument {
   PdfDocumentMethodChannel._({
-    required String sourceName,
-    required String id,
-    required int pagesCount,
-  })  : _pages = List<PdfPage?>.filled(pagesCount, null),
-        super(
-          sourceName: sourceName,
-          id: id,
-          pagesCount: pagesCount,
-        );
+    required super.sourceName,
+    required super.id,
+    required super.pagesCount,
+  })  : _pages = List<PdfPage?>.filled(pagesCount, null);
 
   final List<PdfPage?> _pages;
 
@@ -135,17 +130,12 @@ class PdfDocumentMethodChannel extends PdfDocument {
 
 class PdfPageMethodChannel extends PdfPage {
   PdfPageMethodChannel({
-    required PdfDocument document,
-    required String id,
-    required int pageNumber,
-    required double width,
-    required double height,
+    required super.document,
+    required String super.id,
+    required super.pageNumber,
+    required super.width,
+    required super.height,
   }) : super(
-          document: document,
-          id: id,
-          pageNumber: pageNumber,
-          width: width,
-          height: height,
           autoCloseAndroid: false,
         );
 
@@ -209,22 +199,14 @@ class PdfPageMethodChannel extends PdfPage {
 
 class PdfPageImageMethodChannel extends PdfPageImage {
   PdfPageImageMethodChannel({
-    required String? id,
-    required int pageNumber,
-    required int? width,
-    required int? height,
-    required Uint8List bytes,
-    required PdfPageImageFormat format,
-    required int quality,
-  }) : super(
-          id: id,
-          pageNumber: pageNumber,
-          width: width,
-          height: height,
-          bytes: bytes,
-          format: format,
-          quality: quality,
-        );
+    required super.id,
+    required super.pageNumber,
+    required super.width,
+    required super.height,
+    required super.bytes,
+    required super.format,
+    required super.quality,
+  });
 
   /// Render a full image of specified PDF file.
   ///
