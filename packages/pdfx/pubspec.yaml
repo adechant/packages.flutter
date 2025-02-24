@@ -16,9 +16,9 @@ dependencies:
   plugin_platform_interface: ^2.1.8
   device_info_plus: ^11.3.0
   uuid: ^4.4.0
-  meta: ^1.16.0
+  meta: ^1.15.0
   extension: ^0.6.0
-  synchronized: ^3.3.1
+  synchronized: ^3.3.0
   universal_platform: ^1.1.0
   photo_view: ^0.15.0
   vector_math: ^2.1.4
